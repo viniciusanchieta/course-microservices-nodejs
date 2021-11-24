@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreatePlayerDto } from './dtos/create-player.dto';
+import { IPlayer } from './interfaces/players.interface';
 import { PlayersService } from './players.service';
 
 @Controller('api/v1/players')
@@ -12,5 +13,10 @@ export class PlayersController {
         @Body() createPlayerDto: CreatePlayerDto
     ) {
         await this.playersService.createUpdatePlayer(createPlayerDto);
+    }
+
+    @Get()
+    async getPlayers(): Promise<IPlayer[]> {
+        return this.playersService.getPlayers();
     }
 }
